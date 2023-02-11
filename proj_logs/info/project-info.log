@@ -1,0 +1,6 @@
+{"level":"INFO","time":"2023-02-11T14:32:08.282+0800","caller":"user/user.go:39","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"ERROR","time":"2023-02-11T14:32:08.285+0800","caller":"user/user.go:41","msg":"短信平台调用成功,发送短信 error"}
+{"level":"INFO","time":"2023-02-11T15:21:46.049+0800","caller":"user/user.go:39","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"ERROR","time":"2023-02-11T15:21:46.050+0800","caller":"user/user.go:41","msg":"短信平台调用成功,发送短信 error"}
+{"level":"INFO","time":"2023-02-11T19:16:34.832+0800","caller":"login.service.v1/login_service.go:37","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"ERROR","time":"2023-02-11T19:16:34.874+0800","caller":"login.service.v1/login_service.go:39","msg":"短信平台调用成功,发送短信 error"}

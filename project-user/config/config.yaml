@@ -1,0 +1,17 @@
+zap:
+  debugFileName: "D:\\proj\\managementSystem\\proj_logs\\debug\\project-debug.log"
+  infoFileName: "D:\\proj\\managementSystem\\proj_logs\\info\\project-info.log"
+  warnFileName: "D:\\proj\\managementSystem\\proj_logs\\error\\project-error.log"
+  maxSize: 500,
+  maxAge: 28,
+  maxBackups: 3
+redis:
+  addr: "localhost:6379"
+  password: ""
+  db: 0
+server:
+  name: "Manage System"
+  addr: "127.0.0.1:8080"
+grpc:
+  name: "Grpc"
+  addr: "127.0.0.1:8881"
