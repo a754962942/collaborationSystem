@@ -2,11 +2,15 @@ package router
 
 import (
 	"fmt"
+	"github.com/a754962942/project-common/discovery"
 	"github.com/a754962942/project-common/logs"
+	"github.com/a754962942/project-grpc/user/login"
 	"github.com/a754962942/project-user/config"
 	loginServiceV1 "github.com/a754962942/project-user/pkg/service/login.service.v1"
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/resolver"
+	"log"
 	"net"
 )
 
@@ -51,7 +55,7 @@ func RegisterGrpc() *grpc.Server {
 	g := &gRPCConfig{
 		Addr: config.C.Gc.Addr,
 		RegisterFunc: func(g *grpc.Server) {
-			loginServiceV1.RegisterLoginServiceServer(g, loginServiceV1.New())
+			login.RegisterLoginServiceServer(g, loginServiceV1.New())
 		},
 	}
 	s := grpc.NewServer()
@@ -61,6 +65,7 @@ func RegisterGrpc() *grpc.Server {
 		logs.LG.Info("connot listen")
 	}
 	go func() {
+		log.Printf("grpc server startd as:%s\n", g.Addr)
 		err := s.Serve(listen)
 		if err != nil {
 			logs.LG.Error(fmt.Sprintf("Server started error %s", err))
@@ -68,4 +73,19 @@ func RegisterGrpc() *grpc.Server {
 		}
 	}()
 	return s
+}
+func RegisterEtcdServer() {
+	etcdRegister := discovery.NewResolver(config.C.Etcd.Addrs, logs.LG)
+	resolver.Register(etcdRegister)
+	info := discovery.Server{
+		Name:    config.C.Gc.Name,
+		Addr:    config.C.Gc.Addr,
+		Version: config.C.Gc.Version,
+		Weight:  config.C.Gc.Weight,
+	}
+	r := discovery.NewRegister(config.C.Etcd.Addrs, logs.LG)
+	_, err := r.Register(info, 2)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

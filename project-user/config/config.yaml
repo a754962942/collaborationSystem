@@ -10,8 +10,19 @@ redis:
   password: ""
   db: 0
 server:
-  name: "Manage System"
+  name: "Service System"
   addr: "127.0.0.1:8080"
 grpc:
-  name: "Grpc"
+  name: "user"
   addr: "127.0.0.1:8881"
+  version: "1.0.0"
+  weight: 2
+etcd:
+  addrs:
+    - "127.0.0.1:2379"
+mysql:
+  username: "root"
+  password: "root"
+  host: "127.0.0.1"
+  port: 3306
+  dbname: "manage_system"

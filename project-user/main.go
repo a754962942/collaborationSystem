@@ -19,12 +19,17 @@ func main() {
 		MaxAge:        config.C.L.MaxAge,
 		MaxBackups:    config.C.L.MaxBackups,
 	}
+
 	err := logs.InitLogger(lc)
 	if err != nil {
 		log.Fatalln(err)
 	}
+	//路由
 	router.InitRouter(r)
+	//grpc服务注册
 	grpc := router.RegisterGrpc()
+	//grpc服务注册到etcd
+	router.RegisterEtcdServer()
 	stop := func() {
 		grpc.Stop()
 	}

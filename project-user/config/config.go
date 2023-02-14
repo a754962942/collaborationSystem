@@ -3,17 +3,20 @@ package config
 import (
 	"github.com/a754962942/project-common/logs"
 	"github.com/spf13/viper"
+	"log"
 	"os"
 )
 
 var C = InitConfig()
 
 type Config struct {
-	viper *viper.Viper
-	Sc    *ServerConfig
-	L     *LogConfig
-	R     *RedisConfig
-	Gc    *GrpcConfig
+	viper       *viper.Viper
+	Sc          *ServerConfig
+	L           *LogConfig
+	R           *RedisConfig
+	Gc          *GrpcConfig
+	Etcd        *EtcdConfig
+	MysqlConfig *MysqlConfig
 }
 type ServerConfig struct {
 	Name string
@@ -33,9 +36,21 @@ type LogConfig struct {
 	MaxAge         int
 	MaxBackups     int
 }
+type EtcdConfig struct {
+	Addrs []string
+}
 type GrpcConfig struct {
-	Addr string
-	Name string
+	Addr    string
+	Name    string
+	Version string
+	Weight  int64
+}
+type MysqlConfig struct {
+	UserName string
+	Password string
+	Host     string
+	Port     int
+	Dbname   string
 }
 
 func InitConfig() *Config {
@@ -53,6 +68,8 @@ func InitConfig() *Config {
 	conf.readLogConfig()
 	conf.readRedisConfig()
 	conf.readGrpcConfig()
+	conf.readEtcdConfig()
+	conf.readMysqlConfig()
 	return conf
 }
 
@@ -84,5 +101,26 @@ func (c *Config) readGrpcConfig() {
 	g := &GrpcConfig{}
 	g.Addr = c.viper.GetString("grpc.addr")
 	g.Name = c.viper.GetString("grpc.name")
+	g.Version = c.viper.GetString("grpc.version")
+	g.Weight = c.viper.GetInt64("grpc.weight")
 	c.Gc = g
+}
+func (c *Config) readMysqlConfig() {
+	g := &MysqlConfig{}
+	g.UserName = c.viper.GetString("mysql.username")
+	g.Password = c.viper.GetString("mysql.password")
+	g.Host = c.viper.GetString("mysql.host")
+	g.Port = c.viper.GetInt("mysql.port")
+	g.Dbname = c.viper.GetString("mysql.dbname")
+	c.MysqlConfig = g
+}
+func (c *Config) readEtcdConfig() {
+	sc := &EtcdConfig{}
+	var addrs []string
+	err := c.viper.UnmarshalKey("etcd.addrs", &addrs)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	sc.Addrs = addrs
+	c.Etcd = sc
 }

@@ -7,3 +7,99 @@
 {"level":"INFO","time":"2023-02-11T19:16:34.832+0800","caller":"login.service.v1/login_service.go:37","msg":"短信平台调用成功,发送短信 INFO"}
 {"level":"DEBUG","time":"2023-02-11T19:16:34.874+0800","caller":"login.service.v1/login_service.go:38","msg":"短信平台调用成功,发送短信 debug"}
 {"level":"ERROR","time":"2023-02-11T19:16:34.874+0800","caller":"login.service.v1/login_service.go:39","msg":"短信平台调用成功,发送短信 error"}
+{"level":"INFO","time":"2023-02-13T19:19:37.612+0800","caller":"login.service.v1/login_service.go:38","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"DEBUG","time":"2023-02-13T19:19:37.612+0800","caller":"login.service.v1/login_service.go:39","msg":"短信平台调用成功,发送短信 debug"}
+{"level":"ERROR","time":"2023-02-13T19:19:37.613+0800","caller":"login.service.v1/login_service.go:40","msg":"短信平台调用成功,发送短信 error"}
+{"level":"INFO","time":"2023-02-13T19:21:07.772+0800","caller":"login.service.v1/login_service.go:38","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"DEBUG","time":"2023-02-13T19:21:07.772+0800","caller":"login.service.v1/login_service.go:39","msg":"短信平台调用成功,发送短信 debug"}
+{"level":"ERROR","time":"2023-02-13T19:21:07.772+0800","caller":"login.service.v1/login_service.go:40","msg":"短信平台调用成功,发送短信 error"}
+{"level":"INFO","time":"2023-02-13T20:29:03.820+0800","caller":"login.service.v1/login_service.go:38","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"DEBUG","time":"2023-02-13T20:29:03.820+0800","caller":"login.service.v1/login_service.go:39","msg":"短信平台调用成功,发送短信 debug"}
+{"level":"ERROR","time":"2023-02-13T20:29:03.820+0800","caller":"login.service.v1/login_service.go:40","msg":"短信平台调用成功,发送短信 error"}
+{"level":"ERROR","time":"2023-02-13T20:45:04.091+0800","caller":"discovery/discovery.go:116","msg":"register failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-13T20:45:07.092+0800","caller":"discovery/discovery.go:116","msg":"register failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-13T20:45:10.101+0800","caller":"discovery/discovery.go:116","msg":"register failed","error":"context deadline exceeded"}
+{"level":"INFO","time":"2023-02-14T19:14:01.938+0800","caller":"login.service.v1/login_service.go:38","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"DEBUG","time":"2023-02-14T19:14:01.943+0800","caller":"login.service.v1/login_service.go:39","msg":"短信平台调用成功,发送短信 debug"}
+{"level":"ERROR","time":"2023-02-14T19:14:01.946+0800","caller":"login.service.v1/login_service.go:40","msg":"短信平台调用成功,发送短信 error"}
+{"level":"ERROR","time":"2023-02-14T19:33:51.512+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:34:51.516+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:35:51.514+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:36:51.517+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:37:51.527+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:38:51.518+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:39:51.521+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:40:51.502+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:41:51.515+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:42:51.500+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:43:51.516+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:44:51.512+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:45:51.526+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:46:51.510+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:47:51.506+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:48:51.514+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:49:51.512+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:50:51.504+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:51:51.503+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:52:51.523+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:53:51.512+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:54:51.516+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:55:51.516+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:56:51.521+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:57:51.506+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:58:51.516+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T19:59:51.514+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:00:51.519+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:01:51.515+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:02:51.506+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:03:51.508+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:04:51.508+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:05:51.524+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:06:51.513+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:07:51.500+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:08:51.505+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:09:51.508+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:10:51.510+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:11:51.508+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:12:51.527+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:13:51.509+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:14:51.522+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:15:51.532+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:16:51.515+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:17:51.508+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:18:51.517+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:19:51.511+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:20:51.514+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:21:51.501+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:22:51.511+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:23:51.510+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:24:51.509+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:25:51.514+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:26:51.522+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:27:51.501+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:28:51.519+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:29:51.517+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:30:51.520+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:31:51.518+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:32:51.526+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:33:51.515+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:34:51.507+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:35:51.499+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:36:51.507+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:37:51.508+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:38:51.508+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:39:51.509+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:40:51.511+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:41:51.521+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:42:51.504+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:43:51.517+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:44:51.512+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:45:51.505+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:46:51.517+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-14T20:47:51.515+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}
+{"level":"INFO","time":"2023-02-14T20:51:24.124+0800","caller":"login.service.v1/login_service.go:38","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"DEBUG","time":"2023-02-14T20:51:24.165+0800","caller":"login.service.v1/login_service.go:39","msg":"短信平台调用成功,发送短信 debug"}
+{"level":"ERROR","time":"2023-02-14T20:51:24.165+0800","caller":"login.service.v1/login_service.go:40","msg":"短信平台调用成功,发送短信 error"}
+{"level":"INFO","time":"2023-02-14T20:56:11.361+0800","caller":"login.service.v1/login_service.go:38","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"DEBUG","time":"2023-02-14T20:56:11.402+0800","caller":"login.service.v1/login_service.go:39","msg":"短信平台调用成功,发送短信 debug"}
+{"level":"ERROR","time":"2023-02-14T20:56:11.402+0800","caller":"login.service.v1/login_service.go:40","msg":"短信平台调用成功,发送短信 error"}

@@ -5,15 +5,17 @@ import (
 	common "github.com/a754962942/project-common"
 	"github.com/a754962942/project-common/errs"
 	"github.com/a754962942/project-common/logs"
-	"github.com/a754962942/project-user/pkg/dao"
+	"github.com/a754962942/project-grpc/user/login"
+	"github.com/a754962942/project-user/internal/dao"
+	"github.com/a754962942/project-user/internal/repo"
 	"github.com/a754962942/project-user/pkg/model"
-	"github.com/a754962942/project-user/pkg/repo"
+	"go.uber.org/zap"
 	"log"
 	"time"
 )
 
 type LoginService struct {
-	UnimplementedLoginServiceServer
+	login.UnimplementedLoginServiceServer
 	cache repo.Cache
 }
 
@@ -22,8 +24,7 @@ func New() *LoginService {
 		cache: dao.Rc,
 	}
 }
-func (ls *LoginService) GetCaptcha(ctx context.Context, msg *CaptchaMessage) (*CaptchaResponse, error) {
-
+func (ls *LoginService) GetCaptcha(ctx context.Context, msg *login.CaptchaMessage) (*login.CaptchaResponse, error) {
 	//1. 获取参数
 	mobile := msg.Mobile
 	//2. 校验参数
@@ -42,12 +43,29 @@ func (ls *LoginService) GetCaptcha(ctx context.Context, msg *CaptchaMessage) (*C
 		//5. 存储验证码 redis 过期时间15min
 		c, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 		defer cancel()
-		err := ls.cache.Put(c, "REGISTER_"+mobile, code, 15*time.Minute)
+		err := ls.cache.Put(c, model.RegisterRedisKey+mobile, code, 15*time.Minute)
 		if err != nil {
 			log.Printf("验证码存入redis出错,cause by:%s\n", err)
 			return
 		}
 		log.Printf("将手机号和验证码存redis成功：REGISTER_%s:%s\n", mobile, code)
 	}()
-	return &CaptchaResponse{Code: code}, nil
+	return &login.CaptchaResponse{Code: code}, nil
+}
+func (ls *LoginService) Register(ctx context.Context, msg *login.RegisterMessage) (*login.RegisterResponse, error) {
+	c := context.Background()
+	//	1.校验参数
+	//	2.校验验证码
+	redisCode, err := ls.cache.Get(c, model.RegisterRedisKey+msg.Mobile)
+	if err != nil {
+		zap.L().Error("Register redis get error", zap.Error(err))
+		return nil, errs.GrpcError(model.RedisError)
+	}
+	if redisCode != msg.Captcha {
+		return nil, errs.GrpcError(model.CaptchaError)
+	}
+	//	3.校验业务逻辑(邮箱是否被注册|账号是否被注册|手机号是否被注册)
+
+	//	4.执行业务 将数据存入member表 生成一个数据存入organization表
+	//	5.返回
 }

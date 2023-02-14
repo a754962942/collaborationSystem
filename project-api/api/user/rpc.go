@@ -1,18 +1,24 @@
 package user
 
 import (
-	loginServiceV1 "github.com/a754962942/project-user/pkg/service/login.service.v1"
+	"github.com/a754962942/project-api/config"
+	"github.com/a754962942/project-common/discovery"
+	"github.com/a754962942/project-common/logs"
+	"github.com/a754962942/project-grpc/user/login"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/resolver"
 	"log"
 )
 
-var LoginServiceClient loginServiceV1.LoginServiceClient
+var LoginServiceClient login.LoginServiceClient
 
 func InitRpcUserClient() {
-	conn, err := grpc.Dial("127.0.0.1:8881", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	etcdRegister := discovery.NewResolver(config.C.Etcd.Addrs, logs.LG)
+	resolver.Register(etcdRegister)
+	conn, err := grpc.Dial("etcd:///user", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("did not connect:%v\n", err)
 	}
-	LoginServiceClient = loginServiceV1.NewLoginServiceClient(conn)
+	LoginServiceClient = login.NewLoginServiceClient(conn)
 }

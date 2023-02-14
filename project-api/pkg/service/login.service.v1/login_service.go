@@ -5,8 +5,8 @@ import (
 	"errors"
 	common "github.com/a754962942/project-common"
 	"github.com/a754962942/project-common/logs"
-	"github.com/a754962942/project-user/pkg/dao"
-	"github.com/a754962942/project-user/pkg/repo"
+	"github.com/a754962942/project-user/internal/dao"
+	"github.com/a754962942/project-user/internal/repo"
 	"log"
 	"time"
 )

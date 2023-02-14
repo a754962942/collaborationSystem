@@ -3,6 +3,7 @@ package config
 import (
 	"github.com/a754962942/project-common/logs"
 	"github.com/spf13/viper"
+	"log"
 	"os"
 )
 
@@ -14,10 +15,14 @@ type Config struct {
 	L     *LogConfig
 	R     *RedisConfig
 	Gc    *GrpcConfig
+	Etcd  *EtcdConfig
 }
 type ServerConfig struct {
 	Name string
 	Addr string
+}
+type EtcdConfig struct {
+	Addrs []string
 }
 type RedisConfig struct {
 	Addr string
@@ -53,6 +58,7 @@ func InitConfig() *Config {
 	conf.readLogConfig()
 	conf.readRedisConfig()
 	conf.readGrpcConfig()
+	conf.readEtcdConfig()
 	return conf
 }
 
@@ -85,4 +91,14 @@ func (c *Config) readGrpcConfig() {
 	g.Addr = c.viper.GetString("grpc.addr")
 	g.Name = c.viper.GetString("grpc.name")
 	c.Gc = g
+}
+func (c *Config) readEtcdConfig() {
+	sc := &EtcdConfig{}
+	var addrs []string
+	err := c.viper.UnmarshalKey("etcd.addrs", &addrs)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	sc.Addrs = addrs
+	c.Etcd = sc
 }

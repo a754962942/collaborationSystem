@@ -11,6 +11,7 @@ import (
 )
 
 func main() {
+
 	r := gin.Default()
 	lc := &logs.LogConfig{
 		DebugFileName: config.C.L.DdebugFileName,
