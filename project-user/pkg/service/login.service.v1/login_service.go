@@ -3,10 +3,15 @@ package login_service_v1
 import (
 	"context"
 	common "github.com/a754962942/project-common"
+	"github.com/a754962942/project-common/encrypts"
 	"github.com/a754962942/project-common/errs"
 	"github.com/a754962942/project-common/logs"
 	"github.com/a754962942/project-grpc/user/login"
 	"github.com/a754962942/project-user/internal/dao"
+	"github.com/a754962942/project-user/internal/data/member"
+	"github.com/a754962942/project-user/internal/data/organization"
+	"github.com/a754962942/project-user/internal/database"
+	"github.com/a754962942/project-user/internal/database/tran"
 	"github.com/a754962942/project-user/internal/repo"
 	"github.com/a754962942/project-user/pkg/model"
 	"go.uber.org/zap"
@@ -16,12 +21,18 @@ import (
 
 type LoginService struct {
 	login.UnimplementedLoginServiceServer
-	cache repo.Cache
+	cache            repo.Cache
+	memberRepo       repo.MemberRepo
+	organizationRepo repo.Organization
+	transaction      tran.Transaction
 }
 
 func New() *LoginService {
 	return &LoginService{
-		cache: dao.Rc,
+		cache:            dao.Rc,
+		memberRepo:       dao.NerMemberDao(),
+		organizationRepo: dao.NerOrganization(),
+		transaction:      dao.NerTransactionImpl(),
 	}
 }
 func (ls *LoginService) GetCaptcha(ctx context.Context, msg *login.CaptchaMessage) (*login.CaptchaResponse, error) {
@@ -65,7 +76,66 @@ func (ls *LoginService) Register(ctx context.Context, msg *login.RegisterMessage
 		return nil, errs.GrpcError(model.CaptchaError)
 	}
 	//	3.校验业务逻辑(邮箱是否被注册|账号是否被注册|手机号是否被注册)
-
+	exist, err := ls.memberRepo.GetMemberByEmail(c, msg.Email)
+	if err != nil {
+		zap.L().Error("Register DB get error", zap.Error(err))
+		return nil, errs.GrpcError(model.DBError)
+	}
+	if exist {
+		return nil, errs.GrpcError(model.EmailExist)
+	}
+	exist, err = ls.memberRepo.GetMemberByAccount(c, msg.Name)
+	if err != nil {
+		zap.L().Error("Register DB get error", zap.Error(err))
+		return nil, errs.GrpcError(model.DBError)
+	}
+	if exist {
+		return nil, errs.GrpcError(model.NameExist)
+	}
+	exist, err = ls.memberRepo.GetMemberByMobile(c, msg.Mobile)
+	if err != nil {
+		zap.L().Error("Register DB get error", zap.Error(err))
+		return nil, errs.GrpcError(model.CaptchaNoExist)
+	}
+	if exist {
+		return nil, errs.GrpcError(model.MobileExist)
+	}
 	//	4.执行业务 将数据存入member表 生成一个数据存入organization表
+	pwd := encrypts.Md5(msg.Password)
+	mem := &member.Member{
+		Account:       msg.Name,
+		Password:      pwd,
+		Name:          msg.Name,
+		Mobile:        msg.Mobile,
+		Email:         msg.Email,
+		CreateTime:    time.Now().UnixMilli(),
+		LastLoginTime: time.Now().UnixMilli(),
+		Status:        model.Normal,
+	}
+	err = ls.transaction.Action(func(conn database.DbConn) error {
+		err = ls.memberRepo.SaveMember(conn, c, mem)
+		if err != nil {
+			zap.L().Error("SavaMember get error", zap.Error(err))
+			return errs.GrpcError(model.DBError)
+		}
+		//存入组织
+		org := &organization.Organization{
+			Name:       mem.Name + "个人项目",
+			MemberId:   mem.Id,
+			CreateTime: time.Now().UnixMilli(),
+			Personal:   model.Personal,
+			Avatar:     "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.dtstatic.com%2Fuploads%2Fblog%2F202103%2F31%2F20210331160001_9a852.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.dtstatic.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1673017724&t=ced22fc74624e6940fd6a89a21d30cc5",
+		}
+		err = ls.organizationRepo.SaveOrganization(conn, c, org)
+		if err != nil {
+			zap.L().Error("register SaveOrganization db err", zap.Error(err))
+			return model.DBError
+		}
+		return nil
+	})
+	if err != nil {
+		return nil, errs.GrpcError(model.DBError)
+	}
 	//	5.返回
+	return &login.RegisterResponse{}, nil
 }

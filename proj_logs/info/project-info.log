@@ -94,3 +94,30 @@
 {"level":"ERROR","time":"2023-02-14T20:51:24.165+0800","caller":"login.service.v1/login_service.go:40","msg":"短信平台调用成功,发送短信 error"}
 {"level":"INFO","time":"2023-02-14T20:56:11.361+0800","caller":"login.service.v1/login_service.go:38","msg":"短信平台调用成功,发送短信 INFO"}
 {"level":"ERROR","time":"2023-02-14T20:56:11.402+0800","caller":"login.service.v1/login_service.go:40","msg":"短信平台调用成功,发送短信 error"}
+{"level":"INFO","time":"2023-02-15T20:01:22.062+0800","caller":"login.service.v1/login_service.go:41","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"ERROR","time":"2023-02-15T20:01:22.065+0800","caller":"login.service.v1/login_service.go:43","msg":"短信平台调用成功,发送短信 error"}
+{"level":"INFO","time":"2023-02-15T20:02:11.033+0800","caller":"login.service.v1/login_service.go:41","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"ERROR","time":"2023-02-15T20:02:11.033+0800","caller":"login.service.v1/login_service.go:43","msg":"短信平台调用成功,发送短信 error"}
+{"level":"INFO","time":"2023-02-15T20:18:38.834+0800","caller":"login.service.v1/login_service.go:46","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"ERROR","time":"2023-02-15T20:18:38.834+0800","caller":"login.service.v1/login_service.go:48","msg":"短信平台调用成功,发送短信 error"}
+{"level":"INFO","time":"2023-02-15T20:41:23.377+0800","caller":"login.service.v1/login_service.go:46","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"ERROR","time":"2023-02-15T20:41:23.380+0800","caller":"login.service.v1/login_service.go:48","msg":"短信平台调用成功,发送短信 error"}
+{"level":"ERROR","time":"2023-02-15T21:04:32.774+0800","caller":"login.service.v1/login_service.go:72","msg":"Register redis get error","error":"redis: nil"}
+{"level":"INFO","time":"2023-02-15T21:04:36.566+0800","caller":"login.service.v1/login_service.go:50","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"ERROR","time":"2023-02-15T21:04:36.566+0800","caller":"login.service.v1/login_service.go:52","msg":"短信平台调用成功,发送短信 error"}
+{"level":"ERROR","time":"2023-02-15T21:05:18.647+0800","caller":"login.service.v1/login_service.go:131","msg":"register SaveOrganization db err","error":"Error 1364 (HY000): Field 'id' doesn't have a default value"}
+{"level":"INFO","time":"2023-02-15T21:06:34.733+0800","caller":"login.service.v1/login_service.go:50","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"ERROR","time":"2023-02-15T21:06:34.733+0800","caller":"login.service.v1/login_service.go:52","msg":"短信平台调用成功,发送短信 error"}
+{"level":"ERROR","time":"2023-02-15T21:06:38.186+0800","caller":"login.service.v1/login_service.go:131","msg":"register SaveOrganization db err","error":"Error 1364 (HY000): Field 'id' doesn't have a default value"}
+{"level":"ERROR","time":"2023-02-15T21:09:29.269+0800","caller":"login.service.v1/login_service.go:118","msg":"SavaMember get error","error":"sql: transaction has already been committed or rolled back"}
+{"level":"INFO","time":"2023-02-15T21:09:31.889+0800","caller":"login.service.v1/login_service.go:50","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"ERROR","time":"2023-02-15T21:09:31.889+0800","caller":"login.service.v1/login_service.go:52","msg":"短信平台调用成功,发送短信 error"}
+{"level":"ERROR","time":"2023-02-15T21:09:32.144+0800","caller":"login.service.v1/login_service.go:118","msg":"SavaMember get error","error":"sql: transaction has already been committed or rolled back"}
+{"level":"ERROR","time":"2023-02-15T21:13:20.103+0800","caller":"login.service.v1/login_service.go:131","msg":"register SaveOrganization db err","error":"Error 1364 (HY000): Field 'id' doesn't have a default value"}
+{"level":"INFO","time":"2023-02-15T21:13:22.651+0800","caller":"login.service.v1/login_service.go:50","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"ERROR","time":"2023-02-15T21:13:22.652+0800","caller":"login.service.v1/login_service.go:52","msg":"短信平台调用成功,发送短信 error"}
+{"level":"ERROR","time":"2023-02-15T21:13:22.993+0800","caller":"login.service.v1/login_service.go:131","msg":"register SaveOrganization db err","error":"Error 1364 (HY000): Field 'id' doesn't have a default value"}
+{"level":"INFO","time":"2023-02-15T21:19:32.761+0800","caller":"login.service.v1/login_service.go:50","msg":"短信平台调用成功,发送短信 INFO"}
+{"level":"ERROR","time":"2023-02-15T21:19:32.762+0800","caller":"login.service.v1/login_service.go:52","msg":"短信平台调用成功,发送短信 error"}
+{"level":"ERROR","time":"2023-02-15T21:19:35.246+0800","caller":"login.service.v1/login_service.go:131","msg":"register SaveOrganization db err","error":"Error 1364 (HY000): Field 'id' doesn't have a default value"}
+{"level":"ERROR","time":"2023-02-15T21:20:07.420+0800","caller":"login.service.v1/login_service.go:81","msg":"Register DB get error","error":"sql: transaction has already been committed or rolled back"}

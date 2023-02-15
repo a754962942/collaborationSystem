@@ -59,4 +59,6 @@ func (h *HandleUser) register(c *gin.Context) {
 		return
 	}
 	//4.返回结果
+	c.JSON(http.StatusOK, result.Success(""))
+
 }
