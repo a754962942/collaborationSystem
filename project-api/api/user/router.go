@@ -18,5 +18,5 @@ func (*RouterUser) Route(r *gin.Engine) {
 	user := New()
 	r.POST("/project/login/getCaptcha", user.getCaptcha)
 	r.POST("/project/login/register", user.register)
-
+	r.POST("/project/login", user.login)
 }

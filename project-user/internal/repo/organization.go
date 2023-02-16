@@ -8,4 +8,5 @@ import (
 
 type Organization interface {
 	SaveOrganization(conn database.DbConn, ctx context.Context, organization *organization.Organization) error
+	FindOrganizationByMemId(ctx context.Context, memId int64) ([]*organization.Organization, error)
 }

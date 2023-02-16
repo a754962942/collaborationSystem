@@ -139,3 +139,5 @@
 {"level":"ERROR","time":"2023-02-15T21:19:32.762+0800","caller":"login.service.v1/login_service.go:52","msg":"短信平台调用成功,发送短信 error"}
 {"level":"ERROR","time":"2023-02-15T21:19:35.246+0800","caller":"login.service.v1/login_service.go:131","msg":"register SaveOrganization db err","error":"Error 1364 (HY000): Field 'id' doesn't have a default value"}
 {"level":"ERROR","time":"2023-02-15T21:20:07.420+0800","caller":"login.service.v1/login_service.go:81","msg":"Register DB get error","error":"sql: transaction has already been committed or rolled back"}
+{"level":"ERROR","time":"2023-02-16T21:28:30.364+0800","caller":"discovery/discovery.go:116","msg":"register failed","error":"context deadline exceeded"}
+{"level":"ERROR","time":"2023-02-16T22:24:31.660+0800","caller":"discovery/resolver.go:104","msg":"sync failed","error":"context deadline exceeded"}

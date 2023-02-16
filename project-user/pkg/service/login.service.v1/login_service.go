@@ -5,8 +5,10 @@ import (
 	common "github.com/a754962942/project-common"
 	"github.com/a754962942/project-common/encrypts"
 	"github.com/a754962942/project-common/errs"
+	"github.com/a754962942/project-common/jwts"
 	"github.com/a754962942/project-common/logs"
 	"github.com/a754962942/project-grpc/user/login"
+	"github.com/a754962942/project-user/config"
 	"github.com/a754962942/project-user/internal/dao"
 	"github.com/a754962942/project-user/internal/data/member"
 	"github.com/a754962942/project-user/internal/data/organization"
@@ -14,8 +16,10 @@ import (
 	"github.com/a754962942/project-user/internal/database/tran"
 	"github.com/a754962942/project-user/internal/repo"
 	"github.com/a754962942/project-user/pkg/model"
+	"github.com/jinzhu/copier"
 	"go.uber.org/zap"
 	"log"
+	"strconv"
 	"time"
 )
 
@@ -138,4 +142,28 @@ func (ls *LoginService) Register(ctx context.Context, msg *login.RegisterMessage
 	}
 	//	5.返回
 	return &login.RegisterResponse{}, nil
+}
+func (ls *LoginService) Login(ctx context.Context, msg *login.LoginMessage) (*login.LoginResponse, error) {
+	c := context.Background()
+	//1.去数据库查询账号密码是否正确
+	pwd := encrypts.Md5(msg.Password)
+	mem, _ := ls.memberRepo.FindMember(c, msg.Account, pwd)
+	if mem == nil {
+		return nil, model.AccountAndPwdEroor
+	}
+	memMessage := &login.MemberMessage{}
+	_ = copier.Copy(&memMessage, mem)
+	//2.根据用户ID查组织
+	orgs, _ := ls.organizationRepo.FindOrganizationByMemId(c, mem.Id)
+	if orgs == nil {
+		return nil, model.AccountAndPwdEroor
+	}
+	var orgsMessage []*login.OrganizationMessage
+	_ = copier.Copy(&orgsMessage, orgs)
+	//3.用JWT生成token
+	memIdStr := strconv.FormatInt(mem.Id, 10)
+	token := jwts.CreateToken(memIdStr, time.Duration(config.C.JWTConfig.AccessExp)*24*time.Hour, config.C.JWTConfig.AccessSecret, config.C.JWTConfig.RefreshSecret, time.Duration(config.C.JWTConfig.RefreshExp)*24*time.Hour)
+	tokenList := &login.TokenMessage{}
+	_ = copier.Copy(&tokenList, token)
+	return &login.LoginResponse{Member: memMessage, OrganizationList: orgsMessage, TokenList: tokenList}, nil
 }

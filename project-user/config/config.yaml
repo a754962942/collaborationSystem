@@ -26,3 +26,8 @@ mysql:
   host: "127.0.0.1"
   port: 3309
   dbname: "manage_system"
+jwt:
+  accessExp: 7
+  refreshExp: 14
+  accessSecret: manageSystem
+  refreshSecret: ManageSystem

@@ -6,6 +6,7 @@ import (
 	common "github.com/a754962942/project-common"
 	"github.com/a754962942/project-common/errs"
 	"github.com/a754962942/project-grpc/user/login"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/copier"
 	"net/http"
@@ -61,4 +62,30 @@ func (h *HandleUser) register(c *gin.Context) {
 	//4.返回结果
 	c.JSON(http.StatusOK, result.Success(""))
 
+}
+func (h *HandleUser) login(c *gin.Context) {
+	result := &common.Result{}
+	//1.接受参数
+	req := user.LoginReq{}
+	err := c.ShouldBind(&req)
+	if err != nil {
+		c.JSON(http.StatusOK, result.Fail(http.StatusBadRequest, "参数格式错误"))
+		return
+	}
+	//2.调用GRPC user 完成登录
+	msg := &login.LoginMessage{}
+	err = copier.Copy(msg, req)
+	if err != nil {
+		c.JSON(http.StatusOK, result.Fail(http.StatusBadRequest, err.Error()))
+	}
+	response, err := LoginServiceClient.Login(c, msg)
+	if err != nil {
+		code, msg := errs.ParseGrpcError(err)
+		c.JSON(http.StatusOK, result.Fail(code, msg))
+		return
+	}
+	//4.返回结果
+	rsp := &user.LoginRsp{}
+	err = copier.Copy(rsp, response)
+	c.JSON(http.StatusOK, result.Success(rsp))
 }

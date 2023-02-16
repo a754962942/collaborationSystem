@@ -17,6 +17,7 @@ type Config struct {
 	Gc          *GrpcConfig
 	Etcd        *EtcdConfig
 	MysqlConfig *MysqlConfig
+	JWTConfig   *JWTConfig
 }
 type ServerConfig struct {
 	Name string
@@ -52,6 +53,12 @@ type MysqlConfig struct {
 	Port     int
 	Dbname   string
 }
+type JWTConfig struct {
+	AccessExp     int
+	RefreshExp    int
+	AccessSecret  string
+	RefreshSecret string
+}
 
 func InitConfig() *Config {
 	conf := &Config{viper: viper.New()}
@@ -70,6 +77,7 @@ func InitConfig() *Config {
 	conf.readGrpcConfig()
 	conf.readEtcdConfig()
 	conf.readMysqlConfig()
+	conf.readJWTconfig()
 	return conf
 }
 
@@ -123,4 +131,12 @@ func (c *Config) readEtcdConfig() {
 	}
 	sc.Addrs = addrs
 	c.Etcd = sc
+}
+func (c *Config) readJWTconfig() {
+	j := &JWTConfig{}
+	j.AccessExp = c.viper.GetInt("jwt.accessExp")
+	j.RefreshExp = c.viper.GetInt("jwt.refreshExp")
+	j.AccessSecret = c.viper.GetString("jwt.accessSecret")
+	j.RefreshSecret = c.viper.GetString("jwt.refreshSecret")
+	c.JWTConfig = j
 }

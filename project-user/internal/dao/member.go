@@ -5,6 +5,7 @@ import (
 	"github.com/a754962942/project-user/internal/data/member"
 	"github.com/a754962942/project-user/internal/database"
 	"github.com/a754962942/project-user/internal/database/gorms"
+	"gorm.io/gorm"
 )
 
 type MemberDao struct {
@@ -36,4 +37,12 @@ func (m *MemberDao) GetMemberByMobile(ctx context.Context, mobile string) (bool,
 	var count int64
 	err := m.conn.Default(ctx).Model(&member.Member{}).Where("mobile=?", mobile).Count(&count).Error
 	return count > 0, err
+}
+func (m *MemberDao) FindMember(ctx context.Context, account string, pwd string) (*member.Member, error) {
+	mem := &member.Member{}
+	err := m.conn.Default(ctx).Where("account=? and password=? and status=1", account, pwd).First(&mem).Error
+	if err == gorm.ErrRecordNotFound {
+		return nil, nil
+	}
+	return mem, err
 }
