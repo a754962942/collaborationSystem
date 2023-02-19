@@ -153,6 +153,7 @@ func (ls *LoginService) Login(ctx context.Context, msg *login.LoginMessage) (*lo
 	}
 	memMessage := &login.MemberMessage{}
 	_ = copier.Copy(&memMessage, mem)
+	memMessage.Code, _ = encrypts.EncryptInt64(mem.Id, model.AESKey)
 	//2.根据用户ID查组织
 	orgs, _ := ls.organizationRepo.FindOrganizationByMemId(c, mem.Id)
 	if orgs == nil {
@@ -160,10 +161,17 @@ func (ls *LoginService) Login(ctx context.Context, msg *login.LoginMessage) (*lo
 	}
 	var orgsMessage []*login.OrganizationMessage
 	_ = copier.Copy(&orgsMessage, orgs)
+	for _, v := range orgsMessage {
+		v.Code, _ = encrypts.EncryptInt64(v.Id, model.AESKey)
+	}
 	//3.用JWT生成token
 	memIdStr := strconv.FormatInt(mem.Id, 10)
 	token := jwts.CreateToken(memIdStr, time.Duration(config.C.JWTConfig.AccessExp)*24*time.Hour, config.C.JWTConfig.AccessSecret, config.C.JWTConfig.RefreshSecret, time.Duration(config.C.JWTConfig.RefreshExp)*24*time.Hour)
-	tokenList := &login.TokenMessage{}
-	_ = copier.Copy(&tokenList, token)
+	tokenList := &login.TokenMessage{
+		AccessToken:    token.AccessToken,
+		RefreshToken:   token.RefreshToken,
+		AccessTokenExp: token.AccessExp,
+		TokenType:      "bearer",
+	}
 	return &login.LoginResponse{Member: memMessage, OrganizationList: orgsMessage, TokenList: tokenList}, nil
 }

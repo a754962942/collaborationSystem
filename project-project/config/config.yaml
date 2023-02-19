@@ -1,7 +1,7 @@
 zap:
-  debugFileName: "D:\\proj\\managementSystem\\userlogs\\debug\\project-debug.log"
-  infoFileName: "D:\\proj\\managementSystem\\userlogs\\info\\project-info.log"
-  warnFileName: "D:\\proj\\managementSystem\\userlogs\\error\\project-error.log"
+  debugFileName: "D:\\proj\\managementSystem\\projectlogs\\debug\\project-debug.log"
+  infoFileName: "D:\\proj\\managementSystem\\projectlogs\\info\\project-info.log"
+  warnFileName: "D:\\proj\\managementSystem\\projectlogs\\error\\project-error.log"
   maxSize: 500,
   maxAge: 28,
   maxBackups: 3
@@ -11,10 +11,10 @@ redis:
   db: 0
 server:
   name: "Service System"
-  addr: "127.0.0.1:8080"
+  addr: "127.0.0.1:8081"
 grpc:
-  name: "user"
-  addr: "127.0.0.1:8881"
+  name: "project"
+  addr: "127.0.0.1:8882"
   version: "1.0.0"
   weight: 2
 etcd:

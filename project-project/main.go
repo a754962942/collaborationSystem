@@ -1,17 +1,16 @@
 package main
 
 import (
-	_ "github.com/a754962942/project-api/api"
-	"github.com/a754962942/project-api/config"
-	"github.com/a754962942/project-api/router"
 	common "github.com/a754962942/project-common"
 	"github.com/a754962942/project-common/logs"
+	"github.com/a754962942/project-project/config"
+
+	"github.com/a754962942/project-project/router"
 	"github.com/gin-gonic/gin"
 	"log"
 )
 
 func main() {
-
 	r := gin.Default()
 	lc := &logs.LogConfig{
 		DebugFileName: config.C.L.DdebugFileName,
@@ -21,10 +20,19 @@ func main() {
 		MaxAge:        config.C.L.MaxAge,
 		MaxBackups:    config.C.L.MaxBackups,
 	}
+
 	err := logs.InitLogger(lc)
 	if err != nil {
 		log.Fatalln(err)
 	}
+	//路由
 	router.InitRouter(r)
-	common.Run(r, config.C.Sc.Name, config.C.Sc.Addr, nil)
+	//grpc服务注册
+	grpc := router.RegisterGrpc()
+	//grpc服务注册到etcd
+	router.RegisterEtcdServer()
+	stop := func() {
+		grpc.Stop()
+	}
+	common.Run(r, config.C.Sc.Name, config.C.Sc.Addr, stop)
 }

@@ -1,7 +1,7 @@
 package user
 
 import (
-	"github.com/a754962942/project-user/router"
+	"github.com/a754962942/project-api/router"
 	"github.com/gin-gonic/gin"
 )
 

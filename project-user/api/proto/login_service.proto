@@ -1,5 +1,5 @@
 syntax = "proto3";
-package login.service.v1;
+package login;
 option go_package = "usercenter/pkg/service/login.service.v1";
 
 
@@ -41,6 +41,7 @@ message MemberMessage {
   int32 city = 10;
   int32 area = 11;
   string email = 12;
+  string code =13;
 }
 message OrganizationMessage {
   int64 id = 1;
@@ -54,6 +55,7 @@ message OrganizationMessage {
   int32 province = 9;
   int32 city = 10;
   int32 area = 11;
+  string code = 12;
 }
 message TokenMessage{
   string accessToken = 1;

@@ -1,6 +1,7 @@
 package jwts
 
 import (
+	"fmt"
 	"github.com/golang-jwt/jwt/v4"
 	"time"
 )
@@ -18,17 +19,37 @@ func CreateToken(val string, exp time.Duration, secret string, refreshSecret str
 		"token": val,
 		"exp":   aExp,
 	})
-	aToken, _ := accessToken.SignedString(secret)
+	aToken, _ := accessToken.SignedString([]byte(secret))
 	bExp := time.Now().Add(refreshExp).Unix()
 	refreshToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"token": val,
 		"exp":   bExp,
 	})
-	rToken, _ := refreshToken.SignedString(refreshSecret)
+	rToken, _ := refreshToken.SignedString([]byte(refreshSecret))
 	return &JwtToken{
 		AccessToken:  aToken,
 		RefreshToken: rToken,
 		AccessExp:    aExp,
 		RefreshExp:   bExp,
 	}
+}
+func ParseToken(tokenString string, secret string) {
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		// Don't forget to validate the alg is what you expect:
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+		}
+
+		// hmacSampleSecret is a []byte containing your secret, e.g. []byte("my_secret_key")
+		return []byte(secret), nil
+	})
+
+	//
+
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		fmt.Printf("%v\n", claims)
+	} else {
+		fmt.Println(err)
+	}
+
 }

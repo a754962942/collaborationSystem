@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v3.21.6
-// source: login_service.proto
+// source: project_service.proto
 
 package login_service_v1
 

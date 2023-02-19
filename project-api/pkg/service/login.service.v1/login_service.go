@@ -3,10 +3,11 @@ package login_service_v1
 import (
 	"context"
 	"errors"
+	"github.com/a754962942/project-api/pkg/dao"
+	"github.com/a754962942/project-api/pkg/repo"
 	common "github.com/a754962942/project-common"
 	"github.com/a754962942/project-common/logs"
-	"github.com/a754962942/project-user/internal/dao"
-	"github.com/a754962942/project-user/internal/repo"
+
 	"log"
 	"time"
 )
