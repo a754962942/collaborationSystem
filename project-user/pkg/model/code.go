@@ -14,4 +14,5 @@ var (
 	NameExist          = errs.NewError(10102004, "账号已注册")
 	MobileExist        = errs.NewError(10102005, "手机号已注册")
 	AccountAndPwdEroor = errs.NewError(10102006, "账号或密码不正确")
+	NoLogin            = errs.NewError(10102007, "未登录")
 )

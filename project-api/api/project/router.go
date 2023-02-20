@@ -14,8 +14,10 @@ func init() {
 }
 func (*RouterPeoject) Route(r *gin.Engine) {
 	//初始化grpc的客户端连接
-	InitRpcUserClient()
+	InitRpcRegisterClient()
 	project := New()
-	r.POST("/project/index", project.index)
+	group := r.Group("/project/index")
+	group.Use()
+	group.POST("/project/index", project.index)
 
 }
