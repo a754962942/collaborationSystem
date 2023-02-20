@@ -16,6 +16,7 @@ func TokenVerify() func(ctx *gin.Context) {
 		result := &common.Result{}
 		//1.从header中获取token
 		token := c.GetHeader("Authorization")
+
 		//2.调用user服务进行token认证
 		ctx, cancelFunc := context.WithTimeout(context.Background(), 2*time.Second)
 		defer cancelFunc()
