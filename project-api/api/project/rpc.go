@@ -11,7 +11,7 @@ import (
 	"log"
 )
 
-var RegisterServiceClient project.RegisterServiceClient
+var ProjectServiceClient project.RegisterServiceClient
 
 func InitRpcRegisterClient() {
 	etcdRegister := discovery.NewResolver(config.C.Etcd.Addrs, logs.LG)
@@ -20,5 +20,5 @@ func InitRpcRegisterClient() {
 	if err != nil {
 		log.Fatalf("did not connect:%v\n", err)
 	}
-	RegisterServiceClient = project.NewRegisterServiceClient(conn)
+	ProjectServiceClient = project.NewRegisterServiceClient(conn)
 }

@@ -28,7 +28,7 @@ func TokenVerify() func(ctx *gin.Context) {
 			return
 		}
 		//3.处理结果，认证通过，将信息放入gin的上下文,失败返回未登录
-		c.Set("member", response.Member)
+		c.Set("memberId", response.Member.Id)
 		c.Next()
 	}
 }

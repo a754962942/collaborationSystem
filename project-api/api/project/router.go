@@ -1,6 +1,7 @@
 package project
 
 import (
+	"github.com/a754962942/project-api/api/midd"
 	"github.com/a754962942/project-api/router"
 	"github.com/gin-gonic/gin"
 )
@@ -17,7 +18,8 @@ func (*RouterPeoject) Route(r *gin.Engine) {
 	InitRpcRegisterClient()
 	project := New()
 	group := r.Group("/project/index")
-	group.Use()
-	group.POST("/project/index", project.index)
-
+	group.Use(midd.TokenVerify())
+	group.POST("", project.index)
+	group1 := r.Group("/project/project")
+	group1.POST("/selfList", project.myProjectList)
 }

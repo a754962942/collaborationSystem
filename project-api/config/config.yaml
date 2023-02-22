@@ -1,7 +1,7 @@
 zap:
-  debugFileName: "D:\\proj\\managementSystem\\proj_logs\\debug\\project-debug.log"
-  infoFileName: "D:\\proj\\managementSystem\\proj_logs\\info\\project-info.log"
-  warnFileName: "D:\\proj\\managementSystem\\proj_logs\\error\\project-error.log"
+  debugFileName: "D:\\proj\\managementSystem\\apilogs\\debug\\project-debug.log"
+  infoFileName: "D:\\proj\\managementSystem\\apilogs\\info\\project-info.log"
+  warnFileName: "D:\\proj\\managementSystem\\apilogs\\error\\project-error.log"
   maxSize: 500,
   maxAge: 28,
   maxBackups: 3
