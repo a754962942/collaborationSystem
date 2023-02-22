@@ -28,19 +28,19 @@ type Project struct {
 }
 
 type ProjectMember struct {
-	Id          int64
-	ProjectCode int64
-	MemberCode  int64
-	JoinTime    int64
-	IsOwner     int64
-	Authorize   string
+	Id          int64  `json:"id"`
+	ProjectCode int64  `json:"projectCode"`
+	MemberCode  int64  `json:"memberCode"`
+	JoinTime    int64  `json:"joinTime"`
+	IsOwner     int64  `json:"isOwner"`
+	Authorize   string `json:"authorize"`
 }
 
 type ProjectAndMember struct {
-	Project
-	ProjectCode int64
-	MemberCode  int64
-	JoinTime    int64
-	IsOwner     int64
-	Authorize   string
+	Project     `json:"project"`
+	ProjectCode int64  `json:"projectCode"`
+	MemberCode  int64  `json:"memberCode"`
+	JoinTime    int64  `json:"joinTime"`
+	IsOwner     int64  `json:"isOwner"`
+	Authorize   string `json:"authorize"`
 }
