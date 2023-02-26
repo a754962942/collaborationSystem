@@ -11,7 +11,7 @@ type Project struct {
 	Deleted            int
 	TemplateCode       string
 	Schedule           float64
-	CreateTime         string
+	CreateTime         int64
 	OrganizationCode   int64
 	DeletedTime        string
 	Private            int
@@ -46,9 +46,30 @@ func (p *ProjectMember) TableName() string {
 
 type ProjectAndMember struct {
 	Project
-	ProjectCode int64
-	MemberCode  int64
-	JoinTime    int64
-	IsOwner     int64
-	Authorize   string
+	ProjectCode int64  `json:"projectCode"`
+	MemberCode  int64  `json:"memberCode"`
+	JoinTime    int64  `json:"joinTime"`
+	IsOwner     int64  `json:"isOwner"`
+	Authorize   string `json:"authorize"`
+}
+
+func (m *ProjectAndMember) GetAccessControlType() string {
+	if m.AccessControlType == 0 {
+		return "open"
+	}
+	if m.AccessControlType == 1 {
+		return "private"
+	}
+	if m.AccessControlType == 2 {
+		return "custom"
+	}
+	return ""
+}
+
+func ToMap(orgs []*ProjectAndMember) map[int64]*ProjectAndMember {
+	m := make(map[int64]*ProjectAndMember)
+	for _, v := range orgs {
+		m[v.Id] = v
+	}
+	return m
 }

@@ -89,3 +89,27 @@ func (h *HandleUser) login(c *gin.Context) {
 	err = copier.Copy(rsp, response)
 	c.JSON(http.StatusOK, result.Success(rsp))
 }
+
+func (h *HandleUser) myOrgList(c *gin.Context) {
+	result := &common.Result{}
+	token := c.GetHeader("Authorization")
+	mem, err := LoginServiceClient.TokenVerify(context.Background(), &login.LoginMessage{Token: token})
+	if err != nil {
+		code, msg := errs.ParseGrpcError(err)
+		c.JSON(http.StatusOK, result.Fail(code, msg))
+		return
+	}
+	list, err := LoginServiceClient.MyOrgList(context.Background(), &login.UserMessage{MemId: mem.Member.Id})
+	if err != nil {
+		code, msg := errs.ParseGrpcError(err)
+		c.JSON(http.StatusOK, result.Fail(code, msg))
+		return
+	}
+	if list.OrganizationList == nil {
+		c.JSON(http.StatusOK, result.Success([]*user.OrganizationList{}))
+		return
+	}
+	var orgs []*user.OrganizationList
+	copier.Copy(&orgs, list.OrganizationList)
+	c.JSON(http.StatusOK, result.Success(orgs))
+}

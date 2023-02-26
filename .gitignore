@@ -2,3 +2,5 @@
 projectlogs
 userlogs
 apilogs
+project-api/target
+project-user/target

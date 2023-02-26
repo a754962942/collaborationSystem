@@ -19,4 +19,5 @@ func (*RouterUser) Route(r *gin.Engine) {
 	r.POST("/project/login/getCaptcha", user.getCaptcha)
 	r.POST("/project/login/register", user.register)
 	r.POST("/project/login", user.login)
+	r.POST("/project/organization/_getOrgList", user.myOrgList)
 }

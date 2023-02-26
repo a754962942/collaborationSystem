@@ -12,7 +12,7 @@ type MenuDao struct {
 
 func (m *MenuDao) FindMenus(ctx context.Context) (pms []*menu.ProjectMenu, err error) {
 	session := m.conn.Default(ctx)
-	err = session.Find(&pms).Error
+	err = session.Order("pid,sort asc,id asc").Find(&pms).Error
 	return pms, err
 }
 

@@ -14,7 +14,7 @@ func (p *ProjectDao) FindProjectByMemId(ctx context.Context, memId int64, page i
 	var pms []*pro.ProjectAndMember
 	session := p.conn.Default(ctx)
 	index := (page - 1) * size
-	db := session.Raw("select * from project a,project_member b where a.id = b.project_code and b.member_code =? limit ?,?", memId, index, size)
+	db := session.Raw("select * from project a, project_member b where a.id=b.project_code and b.member_code=? order by `order` limit ?,?", memId, index, size)
 	db.Scan(&pms)
 	var total int64
 	err := session.Model(&pro.ProjectMember{}).Where("member_code =?", memId).Count(&total).Error
