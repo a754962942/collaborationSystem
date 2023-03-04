@@ -22,4 +22,5 @@ func (*RouterPeoject) Route(r *gin.Engine) {
 	group.POST("", project.index)
 	group1 := r.Group("/project/project")
 	group1.POST("/selfList", project.myProjectList)
+	group1.POST("", project.myProjectList)
 }

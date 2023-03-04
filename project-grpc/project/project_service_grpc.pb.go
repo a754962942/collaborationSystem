@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type RegisterServiceClient interface {
 	Index(ctx context.Context, in *IndexMessage, opts ...grpc.CallOption) (*IndexResponse, error)
 	FindProjectByMemId(ctx context.Context, in *ProjectRpcMessage, opts ...grpc.CallOption) (*MyProjectResponse, error)
+	FindProjectTemplate(ctx context.Context, in *ProjectRpcMessage, opts ...grpc.CallOption) (*ProjectTemplateResponse, error)
 }
 
 type registerServiceClient struct {
@@ -52,12 +53,22 @@ func (c *registerServiceClient) FindProjectByMemId(ctx context.Context, in *Proj
 	return out, nil
 }
 
+func (c *registerServiceClient) FindProjectTemplate(ctx context.Context, in *ProjectRpcMessage, opts ...grpc.CallOption) (*ProjectTemplateResponse, error) {
+	out := new(ProjectTemplateResponse)
+	err := c.cc.Invoke(ctx, "/project.RegisterService/FindProjectTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RegisterServiceServer is the server API for RegisterService service.
 // All implementations must embed UnimplementedRegisterServiceServer
 // for forward compatibility
 type RegisterServiceServer interface {
 	Index(context.Context, *IndexMessage) (*IndexResponse, error)
 	FindProjectByMemId(context.Context, *ProjectRpcMessage) (*MyProjectResponse, error)
+	FindProjectTemplate(context.Context, *ProjectRpcMessage) (*ProjectTemplateResponse, error)
 	mustEmbedUnimplementedRegisterServiceServer()
 }
 
@@ -70,6 +81,9 @@ func (UnimplementedRegisterServiceServer) Index(context.Context, *IndexMessage) 
 }
 func (UnimplementedRegisterServiceServer) FindProjectByMemId(context.Context, *ProjectRpcMessage) (*MyProjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindProjectByMemId not implemented")
+}
+func (UnimplementedRegisterServiceServer) FindProjectTemplate(context.Context, *ProjectRpcMessage) (*ProjectTemplateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindProjectTemplate not implemented")
 }
 func (UnimplementedRegisterServiceServer) mustEmbedUnimplementedRegisterServiceServer() {}
 
@@ -120,6 +134,24 @@ func _RegisterService_FindProjectByMemId_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RegisterService_FindProjectTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProjectRpcMessage)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RegisterServiceServer).FindProjectTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/project.RegisterService/FindProjectTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RegisterServiceServer).FindProjectTemplate(ctx, req.(*ProjectRpcMessage))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RegisterService_ServiceDesc is the grpc.ServiceDesc for RegisterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -134,6 +166,10 @@ var RegisterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FindProjectByMemId",
 			Handler:    _RegisterService_FindProjectByMemId_Handler,
+		},
+		{
+			MethodName: "FindProjectTemplate",
+			Handler:    _RegisterService_FindProjectTemplate_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

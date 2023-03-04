@@ -30,6 +30,8 @@ func TokenVerify() func(ctx *gin.Context) {
 		//3.处理结果，认证通过，将信息放入gin的上下文,失败返回未登录
 		c.Set("memberId", response.Member.Id)
 		c.Set("memberName", response.Member.Name)
+		//TODO set OrganizationCode 需要修改user.login逻辑，更新proto并在login时赋值
+		c.Set("memberName", response.Member.Name)
 		c.Next()
 	}
 }
