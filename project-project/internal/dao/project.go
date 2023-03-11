@@ -13,7 +13,7 @@ type ProjectDao struct {
 
 func (p *ProjectDao) FindCollectProjectByMemId(ctx context.Context, memId int64, page int64, size int64, condition string) ([]*pro.ProjectAndMember, int64, error) {
 	var pms []*pro.ProjectAndMember
-	session := p.conn.Default(ctx)
+	session := p.conn.Session(ctx)
 	index := (page - 1) * size
 	sql := fmt.Sprintf("select * from project where id in (select project_code from project_collection where member_code=?) order by `order` limit ?,?")
 	db := session.Raw(sql, memId, index, size)
@@ -27,7 +27,7 @@ func (p *ProjectDao) FindCollectProjectByMemId(ctx context.Context, memId int64,
 
 func (p *ProjectDao) FindProjectByMemId(ctx context.Context, memId int64, page int64, size int64, condition string) ([]*pro.ProjectAndMember, int64, error) {
 	var pms []*pro.ProjectAndMember
-	session := p.conn.Default(ctx)
+	session := p.conn.Session(ctx)
 	index := (page - 1) * size
 	sql := fmt.Sprintf("select * from project a, project_member b where a.id=b.project_code and b.member_code=?  %s order by `order` limit ?,? ", condition)
 	db := session.Raw(sql, memId, index, size)

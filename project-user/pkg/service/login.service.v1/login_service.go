@@ -169,9 +169,13 @@ func (ls *LoginService) Login(ctx context.Context, msg *login.LoginMessage) (*lo
 		v.OwnerCode = memMessage.Code
 		v.CreateTime = tms.FormatByMill(organization.ToMap(orgs)[v.Id].CreateTime)
 	}
+	if len(orgs) > 0 {
+		memMessage.OrganizationCode, _ = encrypts.EncryptInt64(orgs[0].Id, model.AESKey)
+	}
 	//3.用JWT生成token
 	memIdStr := strconv.FormatInt(mem.Id, 10)
 	token := jwts.CreateToken(memIdStr, time.Duration(config.C.JWTConfig.AccessExp)*24*time.Hour, config.C.JWTConfig.AccessSecret, config.C.JWTConfig.RefreshSecret, time.Duration(config.C.JWTConfig.RefreshExp)*24*time.Hour)
+	//放入缓存
 	tokenList := &login.TokenMessage{
 		AccessToken:    token.AccessToken,
 		RefreshToken:   token.RefreshToken,
@@ -190,16 +194,22 @@ func (ls *LoginService) TokenVerify(ctx context.Context, msg *login.LoginMessage
 		zap.L().Error("Login TokenVerify failed.", zap.Error(err))
 		return nil, errs.GrpcError(model.NoLogin)
 	}
+	//缓存中查，没有返回失败
 	//数据库查询 优化点 登录之后， 应该把用户信息存起来
 	id, _ := strconv.ParseInt(parseToken, 10, 64)
-	memberById, err := ls.memberRepo.FindMemberById(context.Background(), id)
-	if err != nil {
-		zap.L().Error("TokenVerify db FindMemberById error", zap.Error(err))
-		return nil, errs.GrpcError(model.DBError)
-	}
+	memberById, _ := ls.memberRepo.FindMemberById(context.Background(), id)
 	memMsg := &login.MemberMessage{}
 	copier.Copy(&memMsg, memberById)
 	memMsg.Code, _ = encrypts.EncryptInt64(memberById.Id, model.AESKey)
+	orgs, _ := ls.organizationRepo.FindOrganizationByMemId(context.Background(), memberById.Id)
+	if orgs == nil {
+		zap.L().Error("Login TokenVerify failed.", zap.Error(err))
+		return nil, errs.GrpcError(model.NoLogin)
+	}
+	if len(orgs) > 0 {
+		memMsg.OrganizationCode, _ = encrypts.EncryptInt64(orgs[0].Id, model.AESKey)
+	}
+
 	return &login.LoginResponse{Member: memMsg}, nil
 }
 func (ls *LoginService) MyOrgList(ctx context.Context, msg *login.UserMessage) (*login.OrgListResponse, error) {

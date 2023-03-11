@@ -9,13 +9,14 @@ type MsTaskStagesTemplate struct {
 }
 
 func (*MsTaskStagesTemplate) TableName() string {
-	return "ms_task_stages_template"
+	return "task_stages_template"
 }
 
 type TaskStagesOnlyName struct {
 	Name string
 }
 
+//coverProjectMap 模板ID-》任务步骤列表
 func CovertProjectMap(tsts []MsTaskStagesTemplate) map[int][]*TaskStagesOnlyName {
 	var tss = make(map[int][]*TaskStagesOnlyName)
 	for _, v := range tsts {

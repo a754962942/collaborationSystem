@@ -42,7 +42,7 @@ func (g *GormConn) Begin() {
 func New() *GormConn {
 	return &GormConn{db: GetDB()}
 }
-func (g *GormConn) Default(ctx context.Context) *gorm.DB {
+func (g *GormConn) Session(ctx context.Context) *gorm.DB {
 	return g.db.Session(&gorm.Session{Context: ctx})
 }
 func NewTran() *GormConn {
